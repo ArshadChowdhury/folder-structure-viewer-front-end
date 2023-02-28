@@ -1,0 +1,40 @@
+.background{
+  background-color: #ECF2FF;
+  height:100vh;
+}
+
+.card{
+  height: 100%;
+  width:40%;
+  border-radius:50px;
+  margin: 0 auto;
+  background-color:#E96479;
+}
+
+.root{
+  display:flex;
+  align-items:start;
+  justify-content:center;
+  padding-top:30px;
+}
+
+.child-elems{
+  padding-top:30px;
+}
+
+.add-btn{
+  margin-left:30px;
+  cursor:pointer;
+  padding:10px;
+  background-color:greenyellow;
+  border-radius:5px;
+}
+
+.add-btn:hover{
+background-color:wheat;
+}
+
+.hidden-form{
+  display:none
+}
+
