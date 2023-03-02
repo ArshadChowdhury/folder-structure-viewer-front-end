@@ -22,7 +22,7 @@ const App = () => {
   const addFolder = () => {
     axios
       .post("http://localhost:3000/create-folder", {
-        folderName: folderName,
+        folder_name: folderName,
       })
       .then(function (response) {
         console.log(response);
