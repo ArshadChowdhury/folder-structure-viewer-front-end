@@ -13,8 +13,9 @@
 
 .root{
   display:flex;
-  align-items:start;
-  justify-content:center;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-around;
   padding-top:30px;
 }
 
@@ -34,7 +35,27 @@
 background-color:wheat;
 }
 
-.hidden-form{
-  display:none
+
+.modal-overlay {
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  bottom:0;
+  left:0;
+  right:0;
+  background: rgba(transparent, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.modal-box {
+  display: block;
+  background: white;
+  width: 30%;
+  height: 30%;
+  padding: 1rem;
+  border-radius: 2rem;
+}

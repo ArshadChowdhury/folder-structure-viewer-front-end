@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Modal from "./components/Modal";
+import UseModal from "./components/UseModal";
 import "./App.css";
 
 const App = () => {
   const [folders, setFolders] = useState<any[]>([]);
-  const [folderName, setFolderName] = useState<string>("");
+  const [folderName, setFolderName] = useState<any>("");
+  const { isOpen, toggle } = UseModal();
 
   useEffect(() => {
     const handleFolderList = async () => {
@@ -14,11 +17,12 @@ const App = () => {
         .catch((err) => console.log(err));
     };
     handleFolderList();
-  }, []);
+  }, [folderName]);
 
   const addFolder = () => {
-      axios.post('http://localhost:3000/create-folder', {
-        folderName: folderName
+    axios
+      .post("http://localhost:3000/create-folder", {
+        folderName: folderName,
       })
       .then(function (response) {
         console.log(response);
@@ -26,7 +30,17 @@ const App = () => {
       .catch(function (error) {
         console.log(error);
       });
-    }
+  };
+
+  const submitAndClose = () => {
+    toggle();
+    addFolder();
+  };
+
+  const getValue = (e: any) => {
+    setFolderName(e.target.value);
+    console.log(folderName);
+  };
 
   return (
     <>
@@ -34,22 +48,24 @@ const App = () => {
         <div className="card">
           <div className="root">
             Root
+            <button className="add-btn" onClick={toggle}>
+              Add Folder
+            </button>
             <div className="child-elems">
               <ul>
                 {folders.map((folder) => (
                   <li className="folders" key={folder._id}>
                     {folder.folderName}
-                    <button className="add-btn" onClick={addFolder}>
-                      Add Folder
-                    </button>
-                    <form>
-                      <label>Folder Name :</label>
-                      <input
-                        type="text"
-                        value={folderName}
-                        onChange={(e) => setFolderName(e.target.value)}
-                      />
-                    </form>
+                    <Modal isOpen={isOpen} toggle={toggle}>
+                      Create a folder <br />
+                      <form onSubmit={submitAndClose}>
+                        <label>Folder Name</label>
+                        <input type="text" onChange={(e) => getValue(e)} />
+                        <button className="add-btn" onClick={submitAndClose}>
+                          Add Folder
+                        </button>
+                      </form>
+                    </Modal>
                   </li>
                 ))}
               </ul>
