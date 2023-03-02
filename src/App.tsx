@@ -30,6 +30,7 @@ const App = () => {
       .catch(function (error) {
         console.log(error);
       });
+      window.location.reload()
   };
 
   const submitAndClose = () => {
@@ -39,7 +40,6 @@ const App = () => {
 
   const getValue = (e: any) => {
     setFolderName(e.target.value);
-    console.log(folderName);
   };
 
   return (
@@ -57,13 +57,18 @@ const App = () => {
                   <li className="folders" key={folder._id}>
                     {folder.folderName}
                     <Modal isOpen={isOpen} toggle={toggle}>
-                      Create a folder <br />
+                      <h1>Create a folder</h1> <br />
                       <form onSubmit={submitAndClose}>
-                        <label>Folder Name</label>
+                        <label>Folder Name </label>
                         <input type="text" onChange={(e) => getValue(e)} />
-                        <button className="add-btn" onClick={submitAndClose}>
+                        <div className="buttons">
+                        <button className="add-btn" onClick={submitAndClose} type="submit">
                           Add Folder
                         </button>
+                        <button className="add-btn" onClick={toggle} type="button">
+                          Close
+                        </button>
+                        </div>
                       </form>
                     </Modal>
                   </li>
